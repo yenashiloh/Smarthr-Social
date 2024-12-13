@@ -143,7 +143,7 @@ require "handlers/logged_info.php";
                       <div class="card-title">Newly Applicants</div>
                       <div class="card-tools">
                           <a 
-                            href="your-link-here" 
+                            href="http://localhost/smarthr/emp/application.php" 
                             class="btn btn-primary"
                             role="button">
                             View All

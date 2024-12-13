@@ -151,8 +151,8 @@ require "handlers/logged_info.php";
                                 
                                 <!-- Buttons -->
                                 <div class="d-flex justify-content-end">
-                                    <button type="submit" name="submit_sched" class="btn btn-primary me-2">Schedule</button>
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                  <button type="button" class="btn btn-danger me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                    <button type="submit" name="submit_sched" class="btn btn-primary">Schedule</button>
                                 </div>
                             </form>
                         </div>

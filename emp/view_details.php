@@ -280,39 +280,35 @@ require "handlers/logged_info.php";
                                     <?php endif; ?>
                                 </li>
                             </ul>
+                            <div class="container mt-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <strong>Scheduled Date and Time:</strong>
+                                        <?php if ($applicationData['sched_status'] !== "Declined"): ?>
+                                            <?php
+                                            $fetch_sched = $conn->prepare("SELECT * FROM schedules WHERE schedule_applied_id = $application_id");
+                                            $fetch_sched->execute();
+                                            $sched_res = $fetch_sched->get_result();
 
-                            <?php if ($applicationData['sched_status'] !== "Declined"): ?>
-                                <?php
-                                $fetch_sched = $conn->prepare("SELECT * FROM schedules WHERE schedule_applied_id = $application_id");
-                                $fetch_sched->execute();
-                                $sched_res = $fetch_sched->get_result();
-
-                                if ($sched_res->num_rows > 0) {
-                                    $scheduleData = $sched_res->fetch_assoc();
-
-                                    echo '<div class="item">
-                                            <div class="table">
-                                                <table>
-                                                    <tr>
-                                                        <td colspan="3"><strong>Scheduled Date and Time</strong></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Date :</strong> ' . $scheduleData['schedule_date'] . ' </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Time :</strong> ' . $scheduleData['schedule_time'] . '</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Note :</strong> Be exact on date and time given</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>';
-                                } else {
-                                    echo "Not yet Schedule";
-                                }
-                                ?>
-                            <?php endif; ?>
+                                            if ($sched_res->num_rows > 0) {
+                                                $scheduleData = $sched_res->fetch_assoc();
+                                            ?>
+                                                <ul>
+                                                    <li><strong>Date:</strong> <?php echo $scheduleData['schedule_date']; ?></li>
+                                                    <li><strong>Time:</strong> <?php echo $scheduleData['schedule_time']; ?></li>
+                                                    <li><strong>Note:</strong> Be exact on date and time given</li>
+                                                </ul>
+                                            <?php
+                                            } else {
+                                                echo "<span>Not yet Scheduled</span>";
+                                            }
+                                            ?>
+                                        <?php else: ?>
+                                            <span>Schedule not available</span>
+                                        <?php endif; ?>
+                                    </li>
+                                </ul>
+                            </div>
 
                             <?php if ($applicationData['sched_status'] === "Declined"): ?>
                                 <div class="alert alert-danger">
@@ -325,7 +321,6 @@ require "handlers/logged_info.php";
                                 <a href="http://localhost/smarthr/emp/application.php" class="btn btn-primary mt-3">Back</a>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>

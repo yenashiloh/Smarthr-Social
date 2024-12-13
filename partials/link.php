@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="public/assets-admin/vendors/typicons/typicons.css">
     <link rel="stylesheet" href="public/assets-admin/vendors/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="public/assets-admin/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="public/assets-admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="public/assets-admin/vendors/bootstrap-\datepicker/bootstrap-datepicker.min.css">
     <!-- endinject -->
     <!-- inject:css -->
     <link rel="stylesheet" href="public/assets-admin/css/style.css">

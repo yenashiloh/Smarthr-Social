@@ -10,20 +10,20 @@ require "handlers/user_logged.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BWD | APPLICANT</title>
-    <link rel="stylesheet" href="http://localhost/smarthr/public/src/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="http://localhost/smarthr/public/src/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="http://localhost/smarthr/public/css/global.css">
-    <!-- APPLICANT CSS CONTENTS -->
-    <link rel="stylesheet" href="http://localhost/smarthr/applicant/css/navigations.css">
-    <link rel="stylesheet" href="http://localhost/smarthr/applicant/css/opportunities.css">
-</head>
-
+    <title>BWD | Opportunities</title>
+    <?php include('../partials/link-emp.php'); ?>
 <body>
-    <?php include "includes/navigation.php" ?>
-    <main>
-        <section>
-            <div class="opportunities">
+<div class="wrapper">
+    <?php include('../partials/sidebar-applicant.php'); ?>
+        <div class="container">
+          <div class="page-inner">
+            <div
+              class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+              <div>
+                <h3 class="fw-bold mb-3">Opportunities</h3>
+              </div>
+            </div>
+            <div class="row">
                 <?php
                 $openJobs = $conn->prepare("SELECT * FROM jobs WHERE status = 'Open'");
                 $openJobs->execute();
@@ -34,37 +34,33 @@ require "handlers/user_logged.php";
                     $jobs[] = $openRow;
                 }
                 ?>
-                <div class="wrapper">
-                    <?php if (!empty($jobs)): ?>
-                        <?php foreach ($jobs as $job): ?>
-                            <div class="job-wrap">
-                                <div class="info">
-                                    <h3><?php echo htmlspecialchars($job['job_position']) ?></h3>
-                                    <p><strong>Open Position : </strong><?php echo htmlspecialchars($job['open_position']) ?></p>
-                                    <p><strong>Work Place : </strong><?php echo htmlspecialchars($job['place']) ?></p>
+                
+                <?php if (!empty($jobs)): ?>
+                    <?php foreach ($jobs as $job): ?>
+                        <div class="col-md-6 mb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo htmlspecialchars($job['job_position']); ?></h5>
+                                    <p class="card-text"><strong>Open Position:</strong> <?php echo htmlspecialchars($job['open_position']); ?></p>
+                                    <p class="card-text"><strong>Work Place:</strong> <?php echo htmlspecialchars($job['place']); ?></p>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal<?php echo htmlspecialchars($job['job_id']); ?>">
+                                        View Details 
+                                    </button>
                                 </div>
-                                <button onclick="showViewModal(<?php echo htmlspecialchars($job['job_id']) ?>)">View Details<i class="fa-solid fa-arrow-right"></i></button>
                             </div>
-                            <?php include "includes/contents/view-job.php" ?>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <p>No Jobs Opportunities</p>
-                    <?php endif; ?>
-                </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No Job Opportunities</p>
+                <?php endif; ?>
             </div>
-        </section>
-    </main>
+            <!-- End Job Cards Section -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php include "includes/contents/view-job.php" ?>
+      <!-- End -->
+    </div>
 
-    <script src="http://localhost/smarthr/applicant/js/navigation.js"></script>
-    <script>
-        function showViewModal(jobId) {
-            document.getElementById("viewModal" + jobId).style.display = "flex";
-        }
-
-        function closeViewModal(jobId) {
-            document.getElementById("viewModal" + jobId).style.display = "none";
-        }
-    </script>
-</body>
-
-</html>
+    <?php include('../partials/footer-emp.php'); ?>

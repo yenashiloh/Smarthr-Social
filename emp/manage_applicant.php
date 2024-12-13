@@ -7,76 +7,55 @@ require "handlers/logged_info.php";
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BWD | APPLICANT</title>
-    <link rel="stylesheet" href="http://localhost/smarthr/public/src/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="http://localhost/smarthr/public/src/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="http://localhost/smarthr/public/css/global.css">
-    <!-- EMP CSS CONTENTS -->
-    <link rel="stylesheet" href="http://localhost/smarthr/emp/css/navigations.css">
-    <link rel="stylesheet" href="http://localhost/smarthr/emp/css/manage.css">
-
-    <style>
-        .acc-buttons {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .acc-buttons button {
-            border: none;
-            outline: none;
-            padding: 5px 7px;
-            color: white;
-            border-radius: 5px;
-            font-size: 12px;
-        }
-    </style>
-</head>
-
-<body>
-    <?php include "includes/navigation.php" ?>
-    <main>
-        <section>
-            <div class="manage">
-                <div class="wrap">
-                    <div class="label">
-                        <h4>ALL APPLICANTS ACCOUNT</h4>
-                        <button>ADD ACCOUNT</button>
-                    </div>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>BWD | Manage Applicant</title>
+    <?php include('../partials/link-emp.php'); ?>
+  </head>
+  <body>
+    <div class="wrapper">
+    <?php include('../partials/sidebar-emp.php'); ?>
+        <div class="container">
+          <div class="page-inner">
+            <?php require "handlers/count_all.php" ?>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="card-title">All Applicants Account</h4>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStaffModal">
+                        <i class="fas fa-plus"></i> Add Account
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
                     <?php
+                      $all_acc = $conn->prepare("SELECT * FROM applicants");
+                      $all_acc->execute();
+                      $acc_result = $all_acc->get_result();
 
-                    $all_acc = $conn->prepare("SELECT * FROM applicants");
-                    $all_acc->execute();
-                    $acc_result = $all_acc->get_result();
-
-                    $count = 1;
-                    $accounts = [];
-                    while ($acc_row = $acc_result->fetch_assoc()) {
-                        $accounts[] = $acc_row;
-                    }
+                      $count = 1;
+                      $accounts = [];
+                      while ($acc_row = $acc_result->fetch_assoc()) {
+                          $accounts[] = $acc_row;
+                      }
                     ?>
-                    <div class="table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Firstname</th>
-                                    <th>Middlename</th>
-                                    <th>Lastname</th>
-                                    <th>Age</th>
-                                    <th>Gender</th>
-                                    <th>Phone Number</th>
-                                    <th>Address</th>
-                                    <th>Email</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                      <table id="basic-datatables" class="display table table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Firstname</th>
+                            <th>Middlename</th>
+                            <th>Lastname</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
                                 <?php if (!empty($accounts)): ?>
                                     <?php foreach ($accounts as $account): ?>
                                         <tr>
@@ -90,11 +69,11 @@ require "handlers/logged_info.php";
                                             <td><?php echo htmlspecialchars($account['address']) ?></td>
                                             <td><?php echo htmlspecialchars($account['email']) ?></td>
                                             <td>
-                                                <div class="acc-buttons">
-                                                    <button style="background-color:blue">UPDATE</button>
+                                            <div class="acc-buttons d-flex align-items-center">
+                                                    <button class="btn btn-warning btn-sm me-2">Update</button>
                                                     <form action="handlers/account/delete.account.php" method="POST">
                                                         <input type="hidden" name="delete_applicant" value="<?php echo htmlspecialchars($account['applicant_id']) ?>">
-                                                        <button style="background-color:red" type="submit" name="deleteApplicantBtn">DELETE</button>
+                                                        <button class="btn btn-danger btn-sm" type="submit" name="deleteApplicantBtn">Delete</button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -103,14 +82,19 @@ require "handlers/logged_info.php";
                                 <?php else: ?>
                                 <?php endif; ?>
                             </tbody>
-                        </table>
+                      </table>
                     </div>
+                  </div>
                 </div>
-            </div>
-        </section>
-    </main>
-
-    <script src="http://localhost/smarthr/emp/js/navigation.js"></script>
-</body>
-
-</html>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- End -->
+    </div>
+    <?php include('../partials/footer-emp.php'); ?>
+    <script>
+  $(document).ready(function () {
+    $("#basic-datatables").DataTable({});
+  });
+</script>

@@ -7,80 +7,59 @@ require "handlers/logged_info.php";
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BWD | APPLICANT</title>
-    <link rel="stylesheet" href="http://localhost/smarthr/public/src/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="http://localhost/smarthr/public/src/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="http://localhost/smarthr/public/css/global.css">
-    <!-- EMP CSS CONTENTS -->
-    <link rel="stylesheet" href="http://localhost/smarthr/emp/css/navigations.css">
-    <link rel="stylesheet" href="http://localhost/smarthr/emp/css/manage.css">
-    <link rel="stylesheet" href="http://localhost/smarthr/emp/css/add/acc.css">
-
-    <style>
-        .acc-buttons {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .acc-buttons button {
-            border: none;
-            outline: none;
-            padding: 5px 7px;
-            color: white;
-            border-radius: 5px;
-            font-size: 12px;
-        }
-    </style>
-</head>
-
-<body>
-    <?php include "includes/navigation.php" ?>
-    <main>
-        <section>
-            <div class="manage">
-                <div class="wrap">
-                    <div class="label">
-                        <h4>ALL STAFFS ACCOUNT</h4>
-                        <button onclick="addStaffModal()">ADD ACCOUNT</button>
-                    </div>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>BWD | Manage Staff</title>
+    <?php include('../partials/link-emp.php'); ?>
+  </head>
+  <body>
+    <div class="wrapper">
+    <?php include('../partials/sidebar-emp.php'); ?>
+        <div class="container">
+          <div class="page-inner">
+            <?php require "handlers/count_all.php" ?>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="card-title mb-0">All Staffs Account</h4>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStaffModal">
+                        <i class="fas fa-plus"></i> Add Account
+                    </button>
+                </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
                     <?php
-                    $all_acc = $conn->prepare("SELECT * FROM staffs");
-                    $all_acc->execute();
-                    $acc_result = $all_acc->get_result();
+                        $all_acc = $conn->prepare("SELECT * FROM staffs");
+                        $all_acc->execute();
+                        $acc_result = $all_acc->get_result();
 
-                    $count = 1;
-                    $accounts = [];
-                    while ($acc_row = $acc_result->fetch_assoc()) {
-                        $accounts[] = $acc_row;
-                    }
+                        $count = 1;
+                        $accounts = [];
+                        while ($acc_row = $acc_result->fetch_assoc()) {
+                            $accounts[] = $acc_row;
+                        }
                     ?>
-                    <div class="table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Firstname</th>
-                                    <th>Middlename</th>
-                                    <th>Lastname</th>
-                                    <th>Age</th>
-                                    <th>Gender</th>
-                                    <th>Phone Number</th>
-                                    <th>Address</th>
-                                    <th>Email</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if (!empty($accounts)): ?>
-                                    <?php foreach ($accounts as $account): ?>
-                                        <tr>
-                                            <td><?php echo $count++ ?></td>
+                      <table id="basic-datatables" class="display table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Firstname</th>
+                                <th>Middlename</th>
+                                <th>Lastname</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Phone Number</th>
+                                <th>Address</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($accounts)): ?>
+                                <?php foreach ($accounts as $account): ?>
+                                    <tr>
+                                    <td><?php echo $count++ ?></td>
                                             <td><?php echo htmlspecialchars($account['firstname']) ?></td>
                                             <td><?php echo htmlspecialchars($account['middlename']) ?></td>
                                             <td><?php echo htmlspecialchars($account['lastname']) ?></td>
@@ -90,160 +69,189 @@ require "handlers/logged_info.php";
                                             <td><?php echo htmlspecialchars($account['address']) ?></td>
                                             <td><?php echo htmlspecialchars($account['email']) ?></td>
                                             <td>
-                                                <div class="acc-buttons">
-                                                    <button style="background-color:blue" onclick="showUpdateModal(<?php echo htmlspecialchars($account['staff_id']) ?>)">UPDATE</button>
-                                                    <form action="handlers/account/delete.account.php" method="POST">
-                                                        <input type="hidden" name="delete_staff" value="<?php echo htmlspecialchars($account['staff_id']) ?>">
-                                                        <button style="background-color:red" type="submit" name="deleteStaffBtn">DELETE</button>
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <div class="update-account" id="updateStaff<?php echo htmlspecialchars($account['staff_id']) ?>">
-                                            <div class="update-content">
-                                                <div class="update-header">
-                                                    <h4>UPDATE STAFF INFORMATION</h4>
-                                                </div>
-                                                <div class="update-body">
-                                                    <form action="" method="POST">
-                                                        <div class="update-row">
-                                                            <div class="update-input">
-                                                                <p>Firstname</p>
-                                                                <input type="text" name="update_firstname" value="<?php echo htmlspecialchars($account['firstname']) ?>">
-                                                            </div>
-                                                            <div class="update-input">
-                                                                <p>Middlename</p>
-                                                                <input type="text" name="update_middlename" value="<?php echo htmlspecialchars($account['middlename']) ?>">
-                                                            </div>
-                                                        </div>
-                                                        <div class="update-row">
-                                                            <div class="update-input">
-                                                                <p>Lastname</p>
-                                                                <input type="text" name="update_lastname" value="<?php echo htmlspecialchars($account['lastname']) ?>">
-                                                            </div>
-                                                            <div class="update-input">
-                                                                <p>Age</p>
-                                                                <input type="number" name="update_age" value="<?php echo htmlspecialchars($account['age']) ?>">
-                                                            </div>
-                                                        </div>
-                                                        <div class="update-row">
-                                                            <div class="update-input">
-                                                                <p>Gender</p>
-                                                                <input type="text" name="update_gender" value="<?php echo htmlspecialchars($account['gender']) ?>">
-                                                            </div>
-                                                            <div class="update-input">
-                                                                <p>Phone Number</p>
-                                                                <input type="text" name="update_phone" value="<?php echo htmlspecialchars($account['phonenumber']) ?>">
-                                                            </div>
-                                                        </div>
-                                                        <div class="update-input">
-                                                            <p>Address</p>
-                                                            <input type="text" name="update_address" value="<?php echo htmlspecialchars($account['address']) ?>">
-                                                        </div>
-                                                        <div class="update-input">
-                                                            <p>Phone Number</p>
-                                                            <input type="email" name="update_email" value="<?php echo htmlspecialchars($account['email']) ?>">
-                                                        </div>
-                                                        <div class="update-input">
-                                                            <p>Update Passowrd</p>
-                                                            <input type="passoword" name="update_passoword" value="">
-                                                        </div>
-                                                        <div class="update-input-btn">
-                                                            <input type="submit" name="submitUpdateBtn" value="UPDATE" style="background-color:blue">
-                                                            <button style="background-color:red" type="button" onclick="closeUpdateModal(<?php echo htmlspecialchars($account['staff_id']) ?>)">CANCEL</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                            <div class="acc-buttons d-flex align-items-center">
+                                            <!-- Update Button -->
+                                            <button 
+                                                type="button"
+                                                class="btn btn-warning btn-sm me-2" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#updateStaffModal<?php echo $account['staff_id']; ?>" 
+                                                data-update-id="<?php echo $account['staff_id']; ?>">
+                                                Update
+                                            </button>
+                                            
+                                            <!-- Delete Form -->
+                                            <form action="handlers/account/delete.account.php" method="POST" class="mb-0">
+                                                <input type="hidden" name="delete_staff" value="<?php echo htmlspecialchars($account['staff_id']); ?>">
+                                                <button class="btn btn-danger btn-sm" type="submit" name="deleteStaffBtn">Delete</button>
+                                            </form>
                                         </div>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
                     </div>
+                  </div>
+                </div>
+              </div>
+                
+              <!-- Add Account Modal -->
+            <div class="modal fade" id="addStaffModal" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addStaffModalLabel">CREATE STAFF INFORMATION</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body">
+                    <form action="handlers/account/add.account.php" method="POST" class="addFormStaff">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                        <label for="firstname" class="form-label">Firstname</label>
+                        <input type="text" class="form-control" name="firstname" id="firstname" value="">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                        <label for="middlename" class="form-label">Middlename</label>
+                        <input type="text" class="form-control" name="middlename" id="middlename" value="">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                        <label for="lastname" class="form-label">Lastname</label>
+                        <input type="text" class="form-control" name="lastname" id="lastname" value="">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" name="age" id="age" value="">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select name="gender" id="gender" class="form-select">
+                            <option value="" selected disabled>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" name="phone" id="phone" value="">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" name="address" id="address" value="">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" value="">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" value="">
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                        <input type="submit" name="submitAddStaff" class="btn btn-primary" value="Create">
+                    </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
 
-                    <div class="add-account" id="addStaff">
-                        <div class="update-content">
-                            <div class="update-header">
-                                <h4>CREATE STAFF INFORMATION</h4>
-                            </div>
-                            <div class="update-body">
-                                <form action="handlers/account/add.account.php" method="POST" class="addFormStaff">
-                                    <div class="update-row">
-                                        <div class="update-input">
-                                            <p>Firstname</p>
-                                            <input type="text" name="firstname" value="">
-                                        </div>
-                                        <div class="update-input">
-                                            <p>Middlename</p>
-                                            <input type="text" name="middlename" value="">
-                                        </div>
+            <?php 
+            foreach ($accounts as $account): ?>
+              <!------- UPDATE MODAL ------------->
+              <div class="modal fade" id="updateStaffModal<?php echo $account['staff_id']; ?>" tabindex="-1" aria-labelledby="updateStaffModalLabel<?php echo $account['staff_id']; ?>" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateStaffModalLabel<?php echo $account['staff_id']; ?>">UPDATE STAFF INFORMATION</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="POST">
+                                <input type="hidden" name="staff_id" value="<?php echo $account['staff_id']; ?>">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="update_firstname<?php echo $account['staff_id']; ?>" class="form-label">Firstname</label>
+                                        <input type="text" class="form-control" name="update_firstname" id="update_firstname<?php echo $account['staff_id']; ?>" value="<?php echo htmlspecialchars($account['firstname']); ?>">
                                     </div>
-                                    <div class="update-row">
-                                        <div class="update-input">
-                                            <p>Lastname</p>
-                                            <input type="text" name="lastname" value="">
-                                        </div>
-                                        <div class="update-input">
-                                            <p>Age</p>
-                                            <input type="number" name="age" value="">
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="update_middlename<?php echo $account['staff_id']; ?>" class="form-label">Middlename</label>
+                                        <input type="text" class="form-control" name="update_middlename" id="update_middlename<?php echo $account['staff_id']; ?>" value="<?php echo htmlspecialchars($account['middlename']); ?>">
                                     </div>
-                                    <div class="update-row">
-                                        <div class="update-input">
-                                            <p>Gender</p>
-                                            <select name="gender">
-                                                <option value="" selected disabled>Select Gender</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                            </select>
-                                        </div>
-                                        <div class="update-input">
-                                            <p>Phone Number</p>
-                                            <input type="text" name="phone" value="">
-                                        </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="update_lastname<?php echo $account['staff_id']; ?>" class="form-label">Lastname</label>
+                                        <input type="text" class="form-control" name="update_lastname" id="update_lastname<?php echo $account['staff_id']; ?>" value="<?php echo htmlspecialchars($account['lastname']); ?>">
                                     </div>
-                                    <div class="update-input">
-                                        <p>Address</p>
-                                        <input type="text" name="address" value="">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="update_age<?php echo $account['staff_id']; ?>" class="form-label">Age</label>
+                                        <input type="number" class="form-control" name="update_age" id="update_age<?php echo $account['staff_id']; ?>" value="<?php echo htmlspecialchars($account['age']); ?>">
                                     </div>
-                                    <div class="update-input">
-                                        <p>Email</p>
-                                        <input type="email" name="email" value="">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="update_gender<?php echo $account['staff_id']; ?>" class="form-label">Gender</label>
+                                        <select name="update_gender" id="update_gender<?php echo $account['staff_id']; ?>" class="form-select">
+                                            <option value="Male" <?php echo ($account['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
+                                            <option value="Female" <?php echo ($account['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
+                                        </select>
                                     </div>
-                                    <div class="update-input">
-                                        <p>Passowrd</p>
-                                        <input type="passoword" name="passoword" value="">
-                                    </div>
-                                    <div class="update-input-btn">
-                                        <input type="submit" name="submitAddStaff" value="CREATE" style="background-color:blue">
-                                        <button style="background-color:red" type="button" onclick="">CANCEL</button>
-                                    </div>
-                                </form>
-                            </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="update_phone<?php echo $account['staff_id']; ?>" class="form-label">Phone Number</label>
+                                    <input type="text" class="form-control" name="update_phone" id="update_phone<?php echo $account['staff_id']; ?>" value="<?php echo htmlspecialchars($account['phonenumber']); ?>">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="update_address<?php echo $account['staff_id']; ?>" class="form-label">Address</label>
+                                    <input type="text" class="form-control" name="update_address" id="update_address<?php echo $account['staff_id']; ?>" value="<?php echo htmlspecialchars($account['address']); ?>">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="update_email<?php echo $account['staff_id']; ?>" class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="update_email" id="update_email<?php echo $account['staff_id']; ?>" value="<?php echo htmlspecialchars($account['email']); ?>">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="update_password<?php echo $account['staff_id']; ?>" class="form-label">Update Password</label>
+                                    <input type="password" class="form-control" name="update_password" id="update_password<?php echo $account['staff_id']; ?>" value="">
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                    <input type="submit" name="submitUpdateBtn" class="btn btn-primary" value="Update">
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <script src="http://localhost/smarthr/emp/js/navigation.js"></script>
+            <?php endforeach; ?>
+          </div>
+        </div>
+      </div>
+      <!-- End -->
+    </div>
+    <?php include('../partials/footer-emp.php'); ?>
     <script>
-        function addStaffModal() {
-            document.getElementById("addStaff").style.display = "flex";
-        }
-
-        function showUpdateModal(staffId) {
-            document.getElementById("updateStaff" + staffId).style.display = "flex";
-        }
-
-        function closeUpdateModal(staffId) {
-            document.getElementById("updateStaff" + staffId).style.display = "none";
-        }
-    </script>
+  $(document).ready(function () {
+    $("#basic-datatables").DataTable({});
+  });
+</script>
 </body>
-
 </html>
