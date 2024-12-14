@@ -14,7 +14,7 @@
         <div class="content-wrapper d-flex align-items-center auth px-0">
           <div class="row w-100 mx-0">
             <div class="col-lg-4 mx-auto">
-              <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5 shadow-lg">
                 <div class="brand-logo">
                   <img src="public/assets/wdLogo.jpg" alt="logo">
                 </div>
@@ -38,7 +38,9 @@
                             SIGN IN
                         </button>
                     </div>
-                  <div class="text-center mt-4 fw-light"> Don't have an account? <a href="register.php" class="text-primary">Create</a>
+                    <div class="text-center mt-4 fw-light">
+                      <small>Don't have an account? <a href="register.php" class="text-primary">Create</a></small>
+                    </div>
                   </div>
                 </form>
               </div>
