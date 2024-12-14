@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Water District</title>
+        <title>Water District Buenavista</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -41,7 +41,7 @@
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0" style="background-color:white;">
             <a href="index.php" class="navbar-brand p-4 d-flex align-items-center">
                 <img src="public/assets/wdLogo.jpg" alt="Water District Logo" style="height: 60px;">
-                <h3 class="text-primary m-0 ms-3">Water District</h3>
+                <h4 class="text-primary m-0 ms-3">Water District Buenavista</h4>
             </a>
 
 

@@ -3,16 +3,17 @@
         <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
-          <a href="dashboard.php" class="logo">
+          <a href="dashboard.php" class="logo" style="display: flex; align-items: center;">
             <img
-              src="../public/assets/wdLogo.jpg"
-              alt="navbar brand"
-              class="navbar-brand"
-              height="40"
-              style="margin-right: 10px;"
+                src="../public/assets/wdLogo.jpg"
+                alt="navbar brand"
+                class="navbar-brand"
+                height="40"
+                style="margin-right: 5px;"
             />
-            <span style="color: white;">Water District</span>
-          </a>
+            <span style="color: white; font-size:13px;">Water District Buenavista</span>
+        </a>
+
             <div class="nav-toggle">
               <button class="btn btn-toggle toggle-sidebar">
                 <i class="gg-menu-right"></i>

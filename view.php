@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Water District</title>
+        <title>Water District Buenavista</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -27,7 +27,7 @@
         <link href="css/style.css" rel="stylesheet">
         <style>
             body {
-                padding-top: 100px; /* Adjust this value based on your navbar height */
+                padding-top: 100px; 
             }
             .navbar {
                 position: fixed;
