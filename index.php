@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Water District Buenavista</title>
+        <title>Buenavista Water District</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -41,7 +41,7 @@
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0" style="background-color:white;">
             <a href="index.php" class="navbar-brand p-4 d-flex align-items-center">
                 <img src="public/assets/wdLogo.jpg" alt="Water District Logo" style="height: 60px;">
-                <h4 class="text-primary m-0 ms-3">Water District Buenavista</h4>
+                <h4 class="text-primary m-0 ms-3">Buenavista Water District</h4>
             </a>
 
 
@@ -71,7 +71,7 @@
                             <img src="img/carousel-1.png" class="img-fluid w-100" alt="Image">
                             <div class="carousel-caption-1">
                                 <div class="carousel-caption-1-content" style="max-width: 900px;">
-                                    <h4 class="text-white text-uppercase fw-bold mb-4 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;" style="letter-spacing: 3px;">Welcome to Water District</h4>
+                                    <h4 class="text-white text-uppercase fw-bold mb-4 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;" style="letter-spacing: 3px;">Welcome to Buenavista Water District</h4>
                                     <h1 class="display-2 text-capitalize text-white mb-4 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1.3s" style="animation-delay: 1.3s;">Providing clean, safe water to our community for generations.</h1>
                                    
                                    
@@ -82,7 +82,7 @@
                             <img src="img/carousel-2.jpg" class="img-fluid w-100" alt="Image">
                             <div class="carousel-caption-2">
                                 <div class="carousel-caption-2-content" style="max-width: 900px;">
-                                    <h4 class="text-white text-uppercase fw-bold mb-4 fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;" style="letter-spacing: 3px;">Welcome to Water District</h4>
+                                    <h4 class="text-white text-uppercase fw-bold mb-4 fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;" style="letter-spacing: 3px;">Welcome to Buenavista Water District</h4>
                                     <h1 class="display-2 text-capitalize text-white mb-4 fadeInRight animated" data-animation="fadeInRight" data-delay="1.3s" style="animation-delay: 1.3s;">Providing clean, safe water to our community for generations.</h1>
                                    
                                 </div>

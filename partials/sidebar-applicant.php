@@ -11,7 +11,7 @@
                 height="40"
                 style="margin-right: 5px;"
             />
-            <span style="color: white; font-size:13px;">Water District Buenavista</span>
+            <span style="color: white; font-size:13px;">Buenavista Water District</span>
         </a>
 
             <div class="nav-toggle">
