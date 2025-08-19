@@ -8,9 +8,10 @@
 
 <div align="center">
   <img src="https://github.com/yenashiloh/Smarthr-Social/blob/main/img/Screenshot%202025-08-19%20143923.png" alt="Hero Section" width="800">
-  <img src="https://github.com/yenashiloh/Smarthr-Social/blob/main/img/Screenshot%202025-08-19%20144011.png" alt="Hero Section" width="800">
-  <img src="https://github.com/yenashiloh/Smarthr-Social/blob/main/img/Screenshot%202025-08-19%20144913.png" alt="Hero Section" width="800">
-  <img src="https://github.com/yenashiloh/Smarthr-Social/blob/main/img/Screenshot%202025-08-19%20144957.png" alt="Hero Section" width="800">
+  <img src="https://github.com/yenashiloh/Smarthr-Social/blob/main/img/Screenshot%202025-08-19%20144011.png" alt="Login" width="800">
+  <img src="https://github.com/yenashiloh/Smarthr-Social/blob/main/img/Screenshot%202025-08-19%20144957.png" alt="Dashboard" width="800">
+  <img src="https://github.com/yenashiloh/Smarthr-Social/blob/main/img/Screenshot%202025-08-19%20144913.png" alt="Account" width="800">
+
   <br><br>
 </div>
 
