@@ -6,6 +6,14 @@
 
 <p>This comprehensive web-based job application system was developed to modernize BWD's recruitment and hiring processes, providing a centralized platform for job seekers to apply for positions while enabling administrators to efficiently manage applications, schedule interviews, and track candidate progress throughout the selection process.</p>
 
+<div align="center">
+  <img src="https://github.com/yenashiloh/Smarthr-Social/blob/main/img/Screenshot%202025-08-19%20143923.png" alt="Hero Section" width="800">
+  <img src="https://github.com/yenashiloh/Smarthr-Social/blob/main/img/Screenshot%202025-08-19%20144011.png" alt="Hero Section" width="800">
+  <img src="https://github.com/yenashiloh/Smarthr-Social/blob/main/img/Screenshot%202025-08-19%20144913.png" alt="Hero Section" width="800">
+  <img src="https://github.com/yenashiloh/Smarthr-Social/blob/main/img/Screenshot%202025-08-19%20144957.png" alt="Hero Section" width="800">
+  <br><br>
+</div>
+
 <h2>💼 <strong>PROJECT OVERVIEW</strong></h2>
 <br>
 
@@ -34,7 +42,6 @@
 </ul>
 
 <h2>✨ <strong>KEY FEATURES</strong></h2>
-<br>
 
 <h3>1. Registration/Login System</h3>
 <ul>
