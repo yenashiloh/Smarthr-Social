@@ -200,6 +200,6 @@
 <h2>📄 <strong>LICENSE</strong></h2>
 <br>
 
-<p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
+<p>This project is licensed under the MIT License - see the <a href="https://github.com/yenashiloh/Smarthr-Social/blob/main/LICENSE.md">LICENSE</a> file for details.</p>
 <br>
 
