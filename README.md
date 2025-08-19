@@ -151,7 +151,6 @@
 </ul>
 
 <h2>🛠 <strong>TECHNOLOGY STACK</strong></h2>
-<br>
 
 <h3>Frontend Technologies</h3>
 <ul>
